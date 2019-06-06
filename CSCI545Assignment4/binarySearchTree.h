@@ -35,7 +35,10 @@ node<T>::node(const T &el)
 template <class T>
 bool node<T>::equal(const T &el)
 {
-	return this.el == el;
+	if (el == NULL) {
+		return false;
+	}
+	return this->el == el;
 }
 
 
@@ -45,7 +48,7 @@ class binarySearchTree
 public:
 
 	binarySearchTree();
-	binarySearchTree(const T &el);
+	binarySearchTree(const T el);
 	void setCurrent(node<T> &n);
 	node<T>* getCurrent();
 	node<T>* getRoot();
@@ -54,7 +57,7 @@ public:
 
 	// Add element in order to tree
 	void add(T el);
-	node<T> find(T el);
+	node<T>* find(T el);
 	void destroy(node<T> *n);
 	void preorder(node<T> *);
 	void inorder(node<T> *);

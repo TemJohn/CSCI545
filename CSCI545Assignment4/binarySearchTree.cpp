@@ -41,10 +41,10 @@ binarySearchTree<T>::binarySearchTree()
 }
 
 template<class T>
-binarySearchTree<T>::binarySearchTree(const T &el)
+binarySearchTree<T>::binarySearchTree(const T el)
 {
-	root = node<T>(el);
-	setCurrent(root);
+	add(el);
+	setCurrent(*root);
 	sz = 1;
 }
 
@@ -91,11 +91,11 @@ void binarySearchTree<T>::add(T el)
 	}
 	// If a node with this same element already exists, destroy the
 	// temporary node and exit this function
-/*	if (find(el).equal(NULL)) {
+	if (find(el)->equal(NULL)) {
 		destroy(newNode);
 		return;
 	}
-	*/
+	
 	// Have current point to a null node where if the new node is
 	// less than the prev node it will be on the left, and if it
 	// is greater than the prev node it will be on the right
@@ -136,7 +136,7 @@ void binarySearchTree<T>::destroy(node<T> *n)
 
 
 template <class T>
-node<T> binarySearchTree<T>::find(T pEl)
+node<T>* binarySearchTree<T>::find(T pEl)
 {
 	bool isfound = false;
 	node<T> *current;
@@ -205,17 +205,18 @@ int binarySearchTree<T>::size()
 
 int main(int argc, char* argv[])
 {
-	binarySearchTree<char> bst;
+	binarySearchTree<char> bst = binarySearchTree<char>('n');
 	bst.add('j');
 	bst.add('a');
 	bst.add('x');
 	bst.add('z');
 	bst.add('m');
 	bst.add('c');
+	cout << "Inorder" << endl;
 	bst.inorder(bst.getRoot());
-	cout << "NEXT" << endl;
+	cout << "Preorder" << endl;
 	bst.preorder(bst.getRoot());
-	cout << "NEXT" << endl;
+	cout << "Postorder" << endl;
 	bst.postorder(bst.getRoot());
 	system("pause");
 	return 0;
